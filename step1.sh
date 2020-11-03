@@ -1,10 +1,12 @@
 ## loadkeys de
+## wifi-menu -o
 ## curl -L https://is.gd/dVV0jV
+## fdisk /dev/sda
 
 cat << EOF > step1.sh
   mkfs.ext4 /dev/sda1
   mount /dev/sda1 /mnt
-  pacstrap /mnt base wireless_tools netctl iw dialog wpa_supplicant vim linux linux-firmware grub
+  pacstrap /mnt base wireless_tools netctl iw dialog wpa_supplicant dhcpcd vim linux linux-firmware grub sudo
   genfstab -U /mnt >> /mnt/etc/fstab
   cp step2.sh /mnt
   cp step3.sh /mnt
@@ -26,19 +28,16 @@ cat << EOF > step2.sh
   grub-install --target=i386-pc /dev/sda
   grub-mkconfig -o /boot/grub/grub.cfg 
   echo
+  echo edit sudoers
+  echo set passwd for root and user
   echo time to reboot
   echo
 EOF
 
 cat << EOF > step3.sh
   # wifi-menu
-  WIF=`netctl list`
-  netctl enable $WIF
-  netctl start $WIF
-  pacman -S sudo openssh wget base-devel git wget mc git acpi htop 
-  # vi /etc/sudoers 
-  # passwd user
+  WIF=\`netctl list\`
+  netctl enable \$WIF
+  netctl start \$WIF
+  pacman -S openssh wget base-devel git wget mc git acpi htop 
 EOF
-
-## fdisk /dev/sda
-## wifi-menu
