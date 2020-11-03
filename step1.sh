@@ -18,19 +18,18 @@ function step2() {
   localectl set-keymap de-latin1-nodeadkeys
   hwclock --systohc
   ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
-  pacman -S grub
   grub-install --target=i386-pc /dev/sda
   grub-mkconfig -o /boot/grub/grub.cfg 
 }
 
-step2
+# step2
 
 # wifi-menu
-# netctl list 
-# netctl enable wlp1s0-WLAN-589717
-# netctl start wlp1s0-WLAN-589717 
-# pacman -S sudo vim openssh wget 
-# useradd -m -G wheel -s /bin/bash user
+netctl list 
+netctl enable wlp1s0-WLAN-716729
+netctl start wlp1s0-WLAN-716729
+pacman -S sudo openssh wget 
+useradd -m -G wheel -s /bin/bash user
 # vi /etc/sudoers 
 # passwd user
-# pacman -S base-devel git wget mc git 
+pacman -S base-devel git wget mc git 
